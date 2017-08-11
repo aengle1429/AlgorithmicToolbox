@@ -5,15 +5,32 @@
 using std::vector;
 
 int binary_search(const vector<int> &a, int x) {
-  int left = 0, right = (int)a.size(); 
-  //write your code here
+	int left = 0, right = (int)a.size(); 
+	right = right - 1;
+	while(left <= right)
+	{
+		int midpoint = (right + left) / 2; // integer division
+		if(a.at(midpoint) == x)
+		{
+			return midpoint;
+		}
+		else if(x > a.at(midpoint))
+		{
+			left = midpoint + 1;
+		}
+		else
+		{
+			right = midpoint - 1; 
+		}
+	}
+	return -1;
 }
 
 int linear_search(const vector<int> &a, int x) {
-  for (size_t i = 0; i < a.size(); ++i) {
-    if (a[i] == x) return i;
-  }
-  return -1;
+    for (size_t i = 0; i < a.size(); ++i) {
+      if (a[i] == x) return i;
+    }
+    return -1;
 }
 
 int main() {
@@ -30,7 +47,6 @@ int main() {
     std::cin >> b[i];
   }
   for (int i = 0; i < m; ++i) {
-    //replace with the call to binary_search when implemented
-    std::cout << linear_search(a, b[i]) << ' ';
+    std::cout << binary_search(a, b[i]) << ' ';
   }
 }
